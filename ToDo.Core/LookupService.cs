@@ -16,9 +16,17 @@ namespace ToDo.Core
             _lookupRepo = lookupRepo;
         }
 
+        public async Task<IList<LookupItem>> GetAll()
+        {
+            return await _lookupRepo.GetAll();
+        }
+
         public async Task<IList<LookupItem>> GetLookup(string tag)
         {
-            return await _lookupRepo.Get<short>(x => x.Tag.Equals(tag), n => n.SortIndex);
+            if (!string.IsNullOrWhiteSpace(tag))
+                return await _lookupRepo.Get<short>(x => x.Tag.Equals(tag), n => n.SortIndex);
+            else
+                return await _lookupRepo.GetAll();
         }
     }
 }

@@ -30,6 +30,12 @@ namespace ToDo.Web.Controllers
 
             return lookups;
         }
+
+        [HttpGet]
+        public async Task<IList<LookupItem>> GetAll()
+        {
+            return await _lookupService.GetAll();
+        }
     }
 
 

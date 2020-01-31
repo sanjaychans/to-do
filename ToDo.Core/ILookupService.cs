@@ -9,5 +9,6 @@ namespace ToDo.Core
     public interface ILookupService
     {
         Task<IList<LookupItem>> GetLookup(string tag);
+        Task<IList<LookupItem>> GetAll();
     }
 }

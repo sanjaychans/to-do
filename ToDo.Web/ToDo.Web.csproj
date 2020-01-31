@@ -30,9 +30,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\helpers\lookupHelper.ts" />
+    <None Remove="ClientApp\src\app\interfaces\lookupItem.ts" />
+    <None Remove="ClientApp\src\app\interfaces\todoentry.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ToDo.Core\ToDo.Core.csproj" />
     <ProjectReference Include="..\ToDo.DAL\ToDo.DAL.csproj" />
     <ProjectReference Include="..\ToDo.Models\ToDo.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\helpers\lookupHelper.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\lookupItem.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\todoentry.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

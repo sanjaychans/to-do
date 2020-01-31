@@ -22,9 +22,9 @@ namespace ToDo.Web.Controllers
 
         [HttpGet]
         [Route("all")]
-        public async Task<IList<ToDoItem>> GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            return await _todoService.GetAll();
+            return Ok(await _todoService.GetAll());
         }
 
         [HttpGet]
@@ -35,13 +35,15 @@ namespace ToDo.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<int> CreateOrUpdate(ToDoItem item)
+        public async Task<IActionResult> CreateOrUpdate(ToDoItem item)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
             int returnId = -1;
             if (item != null)
                 returnId = await _todoService.CreateOrUpdate(item);
 
-            return returnId;
+            return Ok(returnId);
         }
 
     }
