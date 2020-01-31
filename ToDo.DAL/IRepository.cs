@@ -13,7 +13,7 @@ namespace ToDo.DAL
         Task<T> GetByID(int Id);
         Task<List<T>> Get<T2>(Expression<Func<T, bool>> predicate, Expression<Func<T, T2>> order);
         Task Save(T Item);
-        Task Add(T Item);
+        Task<int> Add(T Item);
         Task SaveAll(IEnumerable<T> Items);
         Task AddAll(IEnumerable<T> Items);
         Task Delete(int Id);

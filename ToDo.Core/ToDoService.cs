@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,13 +19,19 @@ namespace ToDo.Core
 
         public async Task<int> CreateOrUpdate(ToDoItem item)
         {
-            var todoItem = _todoRepo.GetByID(item.Id);
+            var todoItem = await _todoRepo.GetByID(item.Id);
+            int returnId;
             if (todoItem == null)
-                await _todoRepo.Add(item);
+                returnId = await _todoRepo.Add(item);
             else
-                await _todoRepo.Save(item);
-
-            return item.Id;
+            {
+                var config = new MapperConfiguration(m => m.CreateMap<ToDoItem, ToDoItem>());
+                var mapper = config.CreateMapper();
+                mapper.Map<ToDoItem, ToDoItem>(item, todoItem);
+                await _todoRepo.Save(todoItem);
+                returnId = item.Id;
+            }
+            return returnId;
         }
 
         public async Task<int> Delete(int Id)

@@ -10,6 +10,11 @@ namespace ToDo.DAL
     {
         public DbSet<ToDoItem> ToDoEntries { get; set; }
         public DbSet<LookupItem> Lookups { get; set; }
+
+        public ToDoDbContext()
+        {
+
+        }
         public ToDoDbContext(DbContextOptions<ToDoDbContext> options) : base(options) { }
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
