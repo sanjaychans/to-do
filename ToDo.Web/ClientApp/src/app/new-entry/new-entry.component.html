@@ -1,0 +1,37 @@
+<mat-card>
+  <span>Create new task</span>
+  <form [formGroup]="entryForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="new-entry-field" >
+      <input matInput placeholder="Subject" formControlName="subject"/>
+    </mat-form-field>
+    <mat-form-field class="new-entry-field" >
+      <input matInput [matDatepicker]="startDate" placeholder="Start Date" formControlName="startDate">
+      <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+      <mat-datepicker #startDate></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="new-entry-field" >
+      <input matInput [matDatepicker]="dueDate" placeholder="Due Date" formControlName="dueDate">
+      <mat-datepicker-toggle matSuffix [for]="dueDate"></mat-datepicker-toggle>
+      <mat-datepicker #dueDate></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="new-entry-field" >
+      <mat-select placeholder="Status" formControlName="status">
+        <mat-option *ngFor="let status of statuses" [value]="status.code">
+          {{status.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="new-entry-field" >
+      <mat-select placeholder="Priority" formControlName="priority">
+        <mat-option *ngFor="let priority of priorities" [value]="priority.code">
+          {{priority.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="new-entry-field" >
+      <input type="number" matInput placeholder="Percentage Completed" formControlName="percentageCompleted"/>
+    </mat-form-field>
+
+    <button mat-raised-button [disabled]="!entryForm.valid">Create</button>
+  </form>
+</mat-card>

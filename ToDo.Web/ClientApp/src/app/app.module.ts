@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { TodoEntriesComponent } from './todo-entries/todo-entries.component';
+import { NewEntryComponent } from './new-entry/new-entry.component';
 
 //services
 import { LookupService } from './lookup.service';
@@ -19,7 +20,10 @@ import { ToDoService } from './to-do.service';
 //material design
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule, MatInputModule, MatDatepickerModule, MatCardModule, MatSelectModule, MatNativeDateModule } from '@angular/material';
 
+//forms
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,7 +32,8 @@ import { MatTableModule } from '@angular/material/table';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    TodoEntriesComponent
+    TodoEntriesComponent,
+    NewEntryComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -36,10 +41,10 @@ import { MatTableModule } from '@angular/material/table';
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: TodoEntriesComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
+      { path: 'new-entry', component: NewEntryComponent },
       { path: 'fetch-data', component: FetchDataComponent },
     ]),
-    BrowserAnimationsModule, MatTableModule
+    BrowserAnimationsModule, MatTableModule, ReactiveFormsModule, MatButtonModule, MatInputModule, MatDatepickerModule, MatCardModule, MatSelectModule, MatNativeDateModule
   ],
   providers: [LookupService, ToDoService],
   bootstrap: [AppComponent]

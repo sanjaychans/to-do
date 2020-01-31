@@ -20,7 +20,8 @@ namespace ToDo.DAL
         public virtual async Task<int> Add(T Item)
         {
             _context.Add(Item);
-            return await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
+            return Item.Id;
         }
 
         public virtual async Task AddAll(IEnumerable<T> Items)

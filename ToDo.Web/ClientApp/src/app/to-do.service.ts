@@ -13,4 +13,8 @@ export class ToDoService {
   getTodoEntries() {
     return this.http.get<todoEntry[]>(this.baseUrl + 'todo/all');
   }
+
+  createEntry(entry) {
+    return this.http.post(this.baseUrl + 'todo', entry);
+  }
 }

@@ -52,7 +52,6 @@ export class lookupHelper {
 
 
   getLookupName(code: string) {
-    //console.log(this.allLookups);
     let list = this.allLookups.filter(function (entry) {
       return entry.code === code;
     });

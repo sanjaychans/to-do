@@ -28,7 +28,6 @@ export class TodoEntriesComponent implements OnInit {
   }
 
   getLookupName(code: string) {
-    console.log(code);
     return this.luHelper.getLookupName(code);
   }
 
