@@ -20,7 +20,7 @@ import { ToDoService } from './to-do.service';
 //material design
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
-import { MatButtonModule, MatInputModule, MatDatepickerModule, MatCardModule, MatSelectModule, MatNativeDateModule } from '@angular/material';
+import { MatButtonModule, MatInputModule, MatDatepickerModule, MatCardModule, MatSelectModule, MatNativeDateModule, MatDialogModule } from '@angular/material';
 
 //forms
 import { ReactiveFormsModule } from '@angular/forms';
@@ -44,7 +44,7 @@ import { ReactiveFormsModule } from '@angular/forms';
       { path: 'new-entry', component: NewEntryComponent },
       { path: 'fetch-data', component: FetchDataComponent },
     ]),
-    BrowserAnimationsModule, MatTableModule, ReactiveFormsModule, MatButtonModule, MatInputModule, MatDatepickerModule, MatCardModule, MatSelectModule, MatNativeDateModule
+    BrowserAnimationsModule, MatTableModule, ReactiveFormsModule, MatButtonModule, MatInputModule, MatDatepickerModule, MatCardModule, MatSelectModule, MatNativeDateModule, MatDialogModule
   ],
   providers: [LookupService, ToDoService],
   bootstrap: [AppComponent]

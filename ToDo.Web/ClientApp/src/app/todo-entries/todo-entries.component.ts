@@ -12,7 +12,7 @@ import { lookupHelper } from '../helpers/lookupHelper';
 })
 export class TodoEntriesComponent implements OnInit {
 
-  displayedColumns: string[] = ['subject', 'startDate', 'dueDate', 'status', 'priority', 'percentageCompleted'];
+  displayedColumns: string[] = ['subject', 'startDate', 'dueDate', 'status', 'priority', 'percentageCompleted', 'actions'];
   dataSource;
   lookups;
 
@@ -31,6 +31,8 @@ export class TodoEntriesComponent implements OnInit {
     return this.luHelper.getLookupName(code);
   }
 
-
+  updateEntry(entry) {
+    console.log('Entry -', entry);
+  }
 
 }

@@ -38,6 +38,8 @@ export class NewEntryComponent implements OnInit {
     console.log(this.entryForm.value);
     this.service.createEntry(this.entryForm.value).subscribe((data) => {
       console.log('Entry Saved - ', data);
+      this.entryForm.reset();
+      
     })
   }
 
