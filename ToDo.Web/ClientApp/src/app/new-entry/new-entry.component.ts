@@ -36,7 +36,7 @@ export class NewEntryComponent implements OnInit {
 
   onSubmit() {
     console.log(this.entryForm.value);
-    this.service.createEntry(this.entryForm.value).subscribe((data) => {
+    this.service.createOrUpdateEntry(this.entryForm.value).subscribe((data) => {
       console.log('Entry Saved - ', data);
       this.entryForm.reset();
       

@@ -8,13 +8,15 @@ import { todoEntry } from './interfaces/todoentry';
 })
 export class ToDoService {
 
-  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) { }
+
+  constructor(private http: HttpClient, @Inject('API_URL') private baseUrl: string) { }
 
   getTodoEntries() {
     return this.http.get<todoEntry[]>(this.baseUrl + 'todo/all');
   }
 
-  createEntry(entry) {
+  createOrUpdateEntry(entry) {
     return this.http.post(this.baseUrl + 'todo', entry);
   }
+   
 }

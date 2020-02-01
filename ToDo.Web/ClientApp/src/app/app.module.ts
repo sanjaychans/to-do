@@ -24,6 +24,7 @@ import { MatButtonModule, MatInputModule, MatDatepickerModule, MatCardModule, Ma
 
 //forms
 import { ReactiveFormsModule } from '@angular/forms';
+import { EditEntryComponent } from './edit-entry/edit-entry.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CounterComponent,
     FetchDataComponent,
     TodoEntriesComponent,
-    NewEntryComponent
+    NewEntryComponent,
+    EditEntryComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -41,11 +43,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: TodoEntriesComponent, pathMatch: 'full' },
-      { path: 'new-entry', component: NewEntryComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
+      { path: 'new-entry', component: NewEntryComponent }
     ]),
     BrowserAnimationsModule, MatTableModule, ReactiveFormsModule, MatButtonModule, MatInputModule, MatDatepickerModule, MatCardModule, MatSelectModule, MatNativeDateModule, MatDialogModule
   ],
+  entryComponents: [EditEntryComponent],
   providers: [LookupService, ToDoService],
   bootstrap: [AppComponent]
 })
