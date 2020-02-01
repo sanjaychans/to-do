@@ -1,4 +1,5 @@
-﻿using Moq;
+﻿using Microsoft.AspNetCore.Mvc;
+using Moq;
 using System;
 using System.Threading.Tasks;
 using ToDo.Core;
@@ -22,10 +23,13 @@ namespace ToDo.Web.Tests
 
             //act
             var returnVal = await controller.CreateOrUpdate(item);
+            var result = returnVal as OkObjectResult;
 
             //assert
             mockService.Verify(x => x.CreateOrUpdate(It.IsAny<ToDoItem>()), Times.Exactly(1));
-            Assert.NotEqual(item.Id, returnVal);
+            Assert.NotNull(result);
+            Assert.NotEqual<int>(item.Id, (int)result.Value);
+
         }
 
         [Fact]
