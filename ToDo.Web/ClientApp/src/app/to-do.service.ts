@@ -1,6 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { todoEntry } from './interfaces/todoentry';
+import { ServiceBase } from './service-base.service';
 
 
 @Injectable({
@@ -8,18 +9,20 @@ import { todoEntry } from './interfaces/todoentry';
 })
 
 //service component for to-do data
-export class ToDoService {
+export class ToDoService extends ServiceBase  {
 
-  constructor(private http: HttpClient, @Inject('API_URL') private baseUrl: string) { }
+  constructor(http: HttpClient, @Inject('API_URL') baseUrl: string) {
+    super(http, baseUrl);
+  }
 
   //service call for all to-do entries
   getTodoEntries() {
-    return this.http.get<todoEntry[]>(this.baseUrl + 'todo/all');
+    return this.makeGetRequest<todoEntry[]>('todo/all');
   }
 
   //service call to create or update a to-do entry
   createOrUpdateEntry(entry) {
-    return this.http.post(this.baseUrl + 'todo', entry);
+    return this.makePostRequest('todo', entry);
   }
 
 }

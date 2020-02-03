@@ -13,6 +13,7 @@ import { NewEntryComponent } from './new-entry/new-entry.component';
 //services
 import { LookupService } from './lookup.service';
 import { ToDoService } from './to-do.service';
+import { ServiceBase } from './service-base.service';
 
 //material design
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -42,7 +43,7 @@ import { EditEntryComponent } from './edit-entry/edit-entry.component';
     BrowserAnimationsModule, MatTableModule, ReactiveFormsModule, MatButtonModule, MatInputModule, MatDatepickerModule, MatCardModule, MatSelectModule, MatNativeDateModule, MatDialogModule
   ],
   entryComponents: [EditEntryComponent],
-  providers: [LookupService, ToDoService],
+  providers: [LookupService, ToDoService, ServiceBase],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

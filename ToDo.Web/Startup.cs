@@ -1,11 +1,14 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ToDo.Web.Filters;
+using Newtonsoft.Json;
 
 namespace ToDo.Web
 {
@@ -35,7 +38,6 @@ namespace ToDo.Web
                 });
             });
             services.AddResponseCaching();
-            services.AddControllers(options => options.Filters.Add(new HttpResponseExceptionFilter()));
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -65,6 +67,20 @@ namespace ToDo.Web
             {
                 app.UseSpaStaticFiles();
             }
+
+            app.UseExceptionHandler(a => a.Run(async context =>
+            {
+                var exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerPathFeature>();
+                var exception = exceptionHandlerPathFeature.Error;
+                string errMessage = null;
+                errMessage = exception is SqlException ?
+                    "An internal server error encountered while connecting to db. Check server logs for more info." :
+                    "An internal server error encountered. Check server logs for more info.";
+
+                var result = JsonConvert.SerializeObject(new { error = errMessage });
+                context.Response.ContentType = "application/json";
+                await context.Response.WriteAsync(result);
+            }));
 
             app.UseRouting();
             app.UseResponseCaching();

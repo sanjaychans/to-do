@@ -58,6 +58,7 @@ export class TodoEntriesComponent implements OnInit {
       }
     })
 
+    //refresh list after dialog close
     this.dialogRef.afterClosed().subscribe((result) => {
       this.loadEntries();
       this.dialogRef = null;
