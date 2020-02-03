@@ -1,3 +1,4 @@
+///model for todo entry
 export interface todoEntry {
   id: number;
   subject: string;

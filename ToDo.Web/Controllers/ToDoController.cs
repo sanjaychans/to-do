@@ -9,6 +9,9 @@ using ToDo.Models;
 
 namespace ToDo.Web.Controllers
 {
+    /// <summary>
+    /// To-Do API controller
+    /// </summary>
     [Route("[controller]")]
     [ApiController]
     public class ToDoController : ControllerBase
@@ -20,6 +23,10 @@ namespace ToDo.Web.Controllers
             _todoService = todoService;
         }
 
+        /// <summary>
+        /// Fetches all to-do entries
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("all")]
         public async Task<IActionResult> GetAll()
@@ -27,6 +34,7 @@ namespace ToDo.Web.Controllers
             return Ok(await _todoService.GetAll());
         }
 
+        //Fetches a to-do entry by Id
         [HttpGet]
         [Route("{Id}")]
         public async Task<ToDoItem> Get(int Id)
@@ -34,6 +42,11 @@ namespace ToDo.Web.Controllers
             return await _todoService.Get(Id);
         }
 
+        /// <summary>
+        /// Creates or updates a to-do entry
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> CreateOrUpdate(ToDoItem item)
         {

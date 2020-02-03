@@ -30,6 +30,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\WeatherForecastController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="ClientApp\src\app\helpers\lookupHelper.ts" />
     <None Remove="ClientApp\src\app\interfaces\lookupItem.ts" />
     <None Remove="ClientApp\src\app\interfaces\todoentry.ts" />

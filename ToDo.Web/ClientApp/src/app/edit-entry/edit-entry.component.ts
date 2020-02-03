@@ -11,6 +11,8 @@ import { TodoEntriesComponent } from '../todo-entries/todo-entries.component';
   templateUrl: './edit-entry.component.html',
   styleUrls: ['./edit-entry.component.css']
 })
+
+///Edit ToDo component
 export class EditEntryComponent implements OnInit {
 
   form: FormGroup;
@@ -27,6 +29,7 @@ export class EditEntryComponent implements OnInit {
     }) {
     this.id = id;
 
+    //initialize the form with data from the MAT DIALOG
     this.form = fb.group({
       id: [id],
       subject: [subject, Validators.required],
@@ -39,24 +42,31 @@ export class EditEntryComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.lookupHelper.getLookup('ST').then((val) => {
-      this.statuses = val;
-    });
-    this.lookupHelper.getLookup('PT').then((val) => {
-      this.priorities = val;
-    });
+    //initialize the lookup entries
+    if (!this.statuses) {
+      this.lookupHelper.getLookup('ST').then((val) => {
+        this.statuses = val;
+      });
+    }
+
+    if (!this.priorities) {
+      this.lookupHelper.getLookup('PT').then((val) => {
+        this.priorities = val;
+      });
+    }
   }
 
   close() {
+    //close the dialog window
     this.dialogRef.close();
   }
 
   save() {
-    console.log(`Update form value - ${this.form.value}`);
+    //invoke ToDoService, save the entry and close the dialog window
     this.service.createOrUpdateEntry(this.form.value).subscribe((data) => {
       console.log(`Update return id - ${data}`);
       this.close();
     });
-    
+
   }
 }

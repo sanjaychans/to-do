@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ToDo.Web.Filters;
 
 namespace ToDo.Web
 {
@@ -33,7 +34,8 @@ namespace ToDo.Web
                     builder.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod();
                 });
             });
-
+            services.AddResponseCaching();
+            services.AddControllers(options => options.Filters.Add(new HttpResponseExceptionFilter()));
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -65,6 +67,7 @@ namespace ToDo.Web
             }
 
             app.UseRouting();
+            app.UseResponseCaching();
 
             app.UseEndpoints(endpoints =>
             {

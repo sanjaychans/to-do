@@ -12,6 +12,8 @@ import { EditEntryComponent } from '../edit-entry/edit-entry.component';
   templateUrl: './todo-entries.component.html',
   styleUrls: ['./todo-entries.component.css']
 })
+
+  ///ToDo entries list component.
 export class TodoEntriesComponent implements OnInit {
 
   displayedColumns: string[] = ['subject', 'startDate', 'dueDate', 'status', 'priority', 'percentageCompleted', 'actions'];
@@ -24,12 +26,11 @@ export class TodoEntriesComponent implements OnInit {
     private dialog: MatDialog) { }
 
   ngOnInit() {
-
     this.loadEntries();
     this.lookups = this.luHelper.getAll();
-    
   }
 
+  //load all to do entries in the system
   loadEntries() {
     this.service.getTodoEntries().subscribe((data) => {
       console.log('Result - ', data);
@@ -37,10 +38,12 @@ export class TodoEntriesComponent implements OnInit {
     });
   }
 
+  //fetch lookup entry name
   getLookupName(code: string) {
     return this.luHelper.getLookupName(code);
   }
 
+  //opens a material dialog and pushes the current row data
   updateEntry(entry) {
     console.log('Entry -', entry);
     this.dialogRef = this.dialog.open(EditEntryComponent, {

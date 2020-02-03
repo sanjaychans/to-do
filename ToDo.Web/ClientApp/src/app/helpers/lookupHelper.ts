@@ -5,14 +5,14 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 
+///Helper class for lookup functionalities
 export class lookupHelper {
 
   allLookups = new Array();
 
-  constructor(private lookupService: LookupService) {
+  constructor(private lookupService: LookupService) { }
 
-  }
-
+  //fetches lookup for a tag
   getLookup(tag?: string) {
     var lookups = new Array();
     var promise = new Promise((resolve, reject) => {
@@ -32,6 +32,7 @@ export class lookupHelper {
     return promise;
   }
 
+  //fetches all lookups
   getAll() {
     var promise = new Promise((resolve, reject) => {
       this.lookupService.fetchAllLookups().subscribe((data) => {
@@ -50,7 +51,7 @@ export class lookupHelper {
     return promise;
   }
 
-
+  //returns the name for a lookup code
   getLookupName(code: string) {
     let list = this.allLookups.filter(function (entry) {
       return entry.code === code;

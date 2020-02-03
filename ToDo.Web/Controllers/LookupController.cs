@@ -9,6 +9,9 @@ using ToDo.Models;
 
 namespace ToDo.Web.Controllers
 {
+    /// <summary>
+    /// Lookup API controller
+    /// </summary>
     [Route("[controller]")]
     [ApiController]
     public class LookupController : ControllerBase
@@ -20,21 +23,32 @@ namespace ToDo.Web.Controllers
             _lookupService = lookupService;
         }
 
+        /// <summary>
+        /// Fetches lookup data by tag
+        /// </summary>
+        /// <param name="tag"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("{tag}")]
-        public async Task<IList<LookupItem>> GetLookupByTag(string tag)
+        [ResponseCache(VaryByQueryKeys = new[] { "tag" }, Duration = 300)]
+        public async Task<IActionResult> GetLookupByTag(string tag)
         {
             IList<LookupItem> lookups = null;
             if (!string.IsNullOrWhiteSpace(tag))
                 lookups = await _lookupService.GetLookup(tag);
 
-            return lookups;
+            return Ok(lookups);
         }
 
+        /// <summary>
+        /// Fetches all lookup data
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
-        public async Task<IList<LookupItem>> GetAll()
+        [ResponseCache(Duration = 300)]
+        public async Task<IActionResult> GetAll()
         {
-            return await _lookupService.GetAll();
+            return Ok(await _lookupService.GetAll());
         }
     }
 
