@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ToDoService } from '../to-do.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { todoEntry } from '../interfaces/todoentry';
 import { lookupHelper } from '../helpers/lookupHelper';
 import { MatDialog } from '@angular/material';
 import { EditEntryComponent } from '../edit-entry/edit-entry.component';
-
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-todo-entries',
@@ -20,6 +21,8 @@ export class TodoEntriesComponent implements OnInit {
   dataSource;
   lookups;
   dialogRef;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   constructor(private service: ToDoService,
     private luHelper: lookupHelper,
@@ -28,6 +31,7 @@ export class TodoEntriesComponent implements OnInit {
   ngOnInit() {
     this.loadEntries();
     this.lookups = this.luHelper.getAll();
+   
   }
 
   //load all to do entries in the system
@@ -35,6 +39,8 @@ export class TodoEntriesComponent implements OnInit {
     this.service.getTodoEntries().subscribe((data) => {
       console.log('Result - ', data);
       this.dataSource = new MatTableDataSource<todoEntry>(data as todoEntry[]);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
     });
   }
 

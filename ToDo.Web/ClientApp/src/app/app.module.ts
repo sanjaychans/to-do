@@ -18,7 +18,7 @@ import { ServiceBase } from './service-base.service';
 //material design
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
-import { MatButtonModule, MatInputModule, MatDatepickerModule, MatCardModule, MatSelectModule, MatNativeDateModule, MatDialogModule } from '@angular/material';
+import { MatButtonModule, MatInputModule, MatDatepickerModule, MatCardModule, MatSelectModule, MatNativeDateModule, MatDialogModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 
 //forms
 import { ReactiveFormsModule } from '@angular/forms';
@@ -40,7 +40,7 @@ import { EditEntryComponent } from './edit-entry/edit-entry.component';
       { path: '', component: TodoEntriesComponent, pathMatch: 'full' },
       { path: 'new-entry', component: NewEntryComponent }
     ]),
-    BrowserAnimationsModule, MatTableModule, ReactiveFormsModule, MatButtonModule, MatInputModule, MatDatepickerModule, MatCardModule, MatSelectModule, MatNativeDateModule, MatDialogModule
+    BrowserAnimationsModule, MatTableModule, ReactiveFormsModule, MatButtonModule, MatInputModule, MatDatepickerModule, MatCardModule, MatSelectModule, MatNativeDateModule, MatDialogModule, MatPaginatorModule, MatSortModule
   ],
   entryComponents: [EditEntryComponent],
   providers: [LookupService, ToDoService, ServiceBase],

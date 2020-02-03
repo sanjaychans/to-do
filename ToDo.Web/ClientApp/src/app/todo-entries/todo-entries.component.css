@@ -1,3 +1,16 @@
 table{
     width:100%;
 }
+
+th{
+    font-size: initial ;
+    font-weight: 900;
+}
+
+tr:nth-child(even) {
+  background: #CCC
+}
+
+tr:nth-child(odd) {
+  background: #FFF
+}
