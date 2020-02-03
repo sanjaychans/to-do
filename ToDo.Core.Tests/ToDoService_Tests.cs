@@ -8,15 +8,22 @@ using Xunit;
 
 namespace ToDo.Core.Tests
 {
+    /// <summary>
+    /// ToDoService test class
+    /// </summary>
     public class ToDoService_Tests
     {
+
+        /// <summary>
+        /// Tests the create flow on the CreateOrUpdate operation
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         [Theory]
         [ClassData(typeof(ToDoService_Create_TestData))]
-
         public async Task CreateOrUpdate_Create_Success(ToDoItem item)
         {
             //arrange
-            ToDoItem existingItem = null;
             Mock<IRepository<ToDoItem>> mockRepo = new Mock<IRepository<ToDoItem>>();
             mockRepo.Setup(x => x.GetByID(It.IsAny<int>())).Returns(Task.FromResult((ToDoItem)null));
             mockRepo.Setup(x => x.Add(item)).Returns(Task.FromResult(1));
@@ -28,10 +35,16 @@ namespace ToDo.Core.Tests
             //assert
             mockRepo.Verify(x => x.GetByID(It.IsAny<int>()), Times.Exactly(1));
             mockRepo.Verify(x => x.Add(item), Times.Exactly(1));
+            mockRepo.Verify(x => x.Save(It.IsAny<ToDoItem>()), Times.Never);
             Assert.NotEqual(item.Id, newId);
 
         }
 
+        /// <summary>
+        /// Tests the update flow on the CreateOrUpdate operation
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         [Theory]
         [ClassData(typeof(ToDoService_Update_TestData))]
         public async Task CreateOrUpdate_Update_Success(ToDoItem item)
@@ -49,7 +62,7 @@ namespace ToDo.Core.Tests
             //assert
             mockRepo.Verify(x => x.GetByID(It.IsAny<int>()), Times.Exactly(1));
             mockRepo.Verify(x => x.Save(It.IsAny<ToDoItem>()), Times.Exactly(1));
-
+            mockRepo.Verify(x => x.Add(item), Times.Never);
             Assert.Equal(item.Id, newId);
 
         }

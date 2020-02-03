@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ToDo.Models
 {
+    /// <summary>
+    /// ToDoItem data model
+    /// </summary>
     public class ToDoItem : Entity
     {
         public string Subject { get; set; }

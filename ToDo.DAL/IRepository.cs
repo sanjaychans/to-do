@@ -7,6 +7,10 @@ using ToDo.Models;
 
 namespace ToDo.DAL
 {
+    /// <summary>
+    /// Entity repository interface for db access
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface IRepository<T> where T : Entity
     {
         Task<List<T>> GetAll();

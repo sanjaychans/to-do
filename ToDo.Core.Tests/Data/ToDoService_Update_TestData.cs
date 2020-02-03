@@ -6,6 +6,9 @@ using ToDo.Models;
 
 namespace ToDo.Core.Tests.Data
 {
+    /// <summary>
+    /// Test data class for updating task.
+    /// </summary>
     class ToDoService_Update_TestData : IEnumerable<object[]>
     {
         public IEnumerator<object[]> GetEnumerator()

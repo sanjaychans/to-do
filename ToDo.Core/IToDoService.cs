@@ -6,6 +6,9 @@ using ToDo.Models;
 
 namespace ToDo.Core
 {
+    /// <summary>
+    /// To Do tsk service interface
+    /// </summary>
     public interface IToDoService
     {
         Task<IList<ToDoItem>> GetAll();

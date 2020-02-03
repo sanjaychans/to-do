@@ -6,6 +6,9 @@ using ToDo.Models;
 
 namespace ToDo.DAL.Test.Data
 {
+    /// <summary>
+    /// Test data class for EntityRepository Add operation.
+    /// </summary>
     class EntityRepository_Add_TestData : IEnumerable<object[]>
     {
         public IEnumerator<object[]> GetEnumerator()
@@ -26,7 +29,5 @@ namespace ToDo.DAL.Test.Data
         }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
-      
     }
 }

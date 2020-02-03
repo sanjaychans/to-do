@@ -5,7 +5,10 @@ using System.Text;
 
 namespace ToDo.Models
 {
-    public class Entity
+    /// <summary>
+    /// Entity base class
+    /// </summary>
+    public abstract class Entity
     {
         [Key]
         public int Id { get; set; }

@@ -6,6 +6,9 @@ using ToDo.Models;
 
 namespace ToDo.Core
 {
+    /// <summary>
+    /// Lookup service interface
+    /// </summary>
     public interface ILookupService
     {
         Task<IList<LookupItem>> GetLookup(string tag);
