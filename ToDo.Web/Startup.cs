@@ -15,10 +15,12 @@ namespace ToDo.Web
     public class Startup
     {
         readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+        private string _contentRootPath = "";
 
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            _contentRootPath = env.ContentRootPath;
         }
 
         public IConfiguration Configuration { get; }
@@ -26,7 +28,12 @@ namespace ToDo.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            ToDo.DAL.Configure.ConfigureServices(services, Configuration.GetConnectionString("DefaultConnection"));
+            string conn = Configuration.GetConnectionString("DefaultConnection");
+            if (conn.Contains("%CONTENTROOTPATH%"))
+            {
+                conn = conn.Replace("%CONTENTROOTPATH%", _contentRootPath);
+            }
+            ToDo.DAL.Configure.ConfigureServices(services, conn);
             ToDo.Core.Configure.ConfigureServices(services);
 
             services.AddCors(options =>
